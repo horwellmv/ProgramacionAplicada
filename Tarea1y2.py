@@ -45,7 +45,6 @@ class MediosTransporte():
 #Test de Super Clase
 '''
 vehiculo1=MediosTransporte("BMW","CBR","Azul")
-
 vehiculo1.__str__()
 vehiculo1.encender()
 vehiculo1.acelerar()
@@ -113,11 +112,13 @@ class Auto(MediosTerrestres):
         print("Baul vacio")
     
     #metodo get para obtener _capacidadBaul
-    def getCapacidadBaul(self):
+    @property
+    def CapacidadBaul(self):
         return self._capacidadBaul
 
     #Metodo Setter para cambiar _capacidadBaul
-    def setCapacidadBaul(self, nuevaCapacidad):
+    @CapacidadBaul.setter
+    def CapacidadBaul(self, nuevaCapacidad):
         self._capacidadBaul=nuevaCapacidad
     
     #Metodo Destructor de la clase Auto
@@ -128,14 +129,12 @@ class Auto(MediosTerrestres):
 #Test de clase Auto
 '''
 auto1=Auto("Ferrary","LaFerrary","Rojo",4,"Dos personas","Secuencial","500 kg")
-
 auto1.__str__()
 auto1.cambiarMarcha()
-print(auto1._capacidadBaul)
-auto1.setCapacidadBaul("100 kg") #seteamos capacidad baul
-print(auto1.getCapacidadBaul()) #Obtenemos capacidad baul
+print(auto1.CapacidadBaul) #Obtenemos capacidad baul
+auto1.CapacidadBaul="Media tonelada" #seteamos capacidad baul
+print(auto1.CapacidadBaul) #Obtenemos capacidad baul
 '''
-
 #---------------------------------------------------------------------------------------------------
 
 #definicion clase hija moto hereda de MediosTransporte y MediosTerrestres
@@ -145,13 +144,13 @@ class Moto(MediosTerrestres):
         self._cilindrada=cilindrada
     
     #Metodo get para obtener _cilindrada como atributo privado
-    #@property
-    def getCilindrada(self):
+    @property
+    def Cilindrada(self):
         return self._cilindrada
     
     #Metodo setter para cambiar _cilindrada como atributo privado
-    #@_cilindrada.setter
-    def setCilindrada(self, nuevaCilindrada):
+    @Cilindrada.setter
+    def Cilindrada(self, nuevaCilindrada):
         self._cilindrada=nuevaCilindrada
     
     def __str__(self):
@@ -172,10 +171,7 @@ class Moto(MediosTerrestres):
 '''
 moto1=Moto("Ducati","Monster","Negro",2,"dos personas","6 velocidades","1.000cc")
 moto1.__str__()
-print(moto1.getCilindrada())
-moto1.setCilindrada("999cc")
-print(moto1.getCilindrada())
+print(moto1.Cilindrada)
+moto1.Cilindrada="999cc"
+print(moto1.Cilindrada)
 '''
-#---------------------------------------------------------------------------------------------------
-
-        
