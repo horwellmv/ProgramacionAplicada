@@ -4,7 +4,12 @@ TP PROGRAMACION APLICADA / GRUPO 8
 
 ENTREGA: 18 de Nov. / 10 a 30 minuts
 INTEGRANTES: BROGGI LAUTARO (lautarobroggi02@gmail.com)- FEDERICO A BRITEZ - MURILLO HORWELL
+------------------------------------------------
 
+DIAGRAMA DE CLASES SUGERIDO:
+
+https://lucid.app/lucidchart/5b0938aa-6d37-4103-9d18-162bfae907e4/edit?viewport_loc=-2441%2C-1503%2C3207%2C1386%2C0_0&invitationId=inv_449d7960-d2d3-4527-a475-539baecccecd
+------------------------------------------------
 
 SE PIDE USAR LOS CONCEPTOS DE :
 -POO
@@ -12,6 +17,8 @@ SE PIDE USAR LOS CONCEPTOS DE :
 -constructores
 -getters & setters SOLO los que se deban poder cambiar. (Ej: dniUsuario no)
 -metodos
+-App de consola o tkinter u otros para vista.
+------------------------------------------------
 
 MENU SUGERIDO
 
@@ -24,12 +31,14 @@ menu opciones:
     1.2 Producto de limpieza
 2. Registrar Venta
 
-3. Registrar socio
+3. Registrar socio.
+------------------------------------------------
 
 PROGRAA SUGERIDO PARA LA VISTA: Tkinter
-https://docs.python.org/es/3/library/tkinter.html
 
---------------------------------------
+https://docs.python.org/es/3/library/tkinter.html
+------------------------------------------------
+
 CONSIGNA:
 1. Dados los siguientes requisitos definir las clases y los atributos a desarrollar para llevar a
 cabo un sistema de Facturación de Minimercado PA2A
@@ -49,8 +58,8 @@ el monto total de la compra.
 Con cada venta, el sistema debe realizar la actualización del stock correspondiente y generar y
 registrar la factura y/o ticket emitido con los descuentos efectuados (según el cliente sea o no socio)
 y el detalle de productos vendidos.
+------------------------------------------------
 
----------------------------
 .PY DE CLASE FACTURA Y CLASE FACTURADETALLE
 
 class Factura:
@@ -70,4 +79,4 @@ class Detalle():
         self._producto=producto
         self._cantidad=cantidad
         self._precioUnitario=precioUnitario
-
+------------------------------------------------
