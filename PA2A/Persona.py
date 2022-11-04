@@ -3,31 +3,18 @@
 from abc import ABC, abstractclassmethod
 
 class Persona(ABC):
-    def __init__(self,nombre,id,telefono,direccion):
-        self._nombre=nombre
+    def __init__(self,telefono="Null",direccion="Null"):
         self._telefono=telefono
         self._direccion=direccion
     
 
     # ---------------------------------- Meotodos Abstr
 
-    def __init__(self):
-        return "Nombre: {} - Telefono: {} - Direccion: {} -".format(
-            self.nombre,
-            self.telefono,
-            self.direccion
-        )
-
     @abstractclassmethod
-    def metodo():
+    def guardar():
         pass
 
-
     # --------------------------------- Getters & Setters
-
-    @property
-    def nombre(self):
-        return self._nombre
 
     @property
     def telefono(self):
@@ -37,10 +24,6 @@ class Persona(ABC):
     def telefono(self,nuevoTelefono):
         self._telefono=nuevoTelefono
 
-    @nombre.setter
-    def nombre(self, nuevaFecha):
-        self._fechaVencimiento=nuevaFecha
-    
     @property
     def direccion(self):
         return self._direccion
