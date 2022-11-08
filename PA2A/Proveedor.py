@@ -7,9 +7,8 @@ class Proveedor(Persona):
         self._razonSocial=razonSocial
         self._categoria=categoria
         self.guardar()
-    
 
-# ----------------------------- Metodos de la clase
+        # ----------------------------- Metodos de la clase
 
     def __str__(self):
         return "Cuit: {} - Razon Social: {} - Categoria: {} - telefono: {} - Direccion: {}.".format(
@@ -21,8 +20,19 @@ class Proveedor(Persona):
         )
     
     def guardar(self):
-        proovedorNew=[self.cuit,self.razonSocial,self.categoria,self.telefono,self.direccion]
-        proveedorsList.append(proovedorNew)
+        proveedorsList.append(self)
+        print("-- Proveedor guardado! --\n")
+    
+    def editar(self,categoria,telefono="Null",direccion="Null"):
+        self.categoria=categoria
+        self.telefono=telefono
+        self.direccion=direccion
+        print("-- Proveedor editado! --\n")
+    
+    def remito(self):
+        if self.categoria=="c":
+            return pConsumo
+        return pLimpieza
 
 # ----------------------------- Getters & setters
 
@@ -44,14 +54,8 @@ class Proveedor(Persona):
 
 # ----------------------------------------- Recursos de la clase
 
+pConsumo = [["arroz",10,"PC001",450],["fideos",15,"PC002",200],["azucar",20,"PC3",150],["aceite",10,"PC004",350],["leche",50,"PC005",160]]
+pLimpieza = [["escoba",5,"PL001",500],["secador",5,"PL002",300],["trapo de piso",5,"PL003",150],["plumero",5,"PL004",700],["esponja",5,"PL005",60]]
+
 proveedorsList=[]
 
-def editarProveedor(cuit,razonSocial,categoria,telefono="Null",direccion="Null"):
-        list=[cuit,razonSocial,categoria,telefono,direccion]
-        for proveedor in proveedorsList:
-            if proveedor[0]==list[0]:
-                proveedor[1]=list[1]
-                proveedor[2]=list[2]
-                proveedor[3]=list[3]
-                proveedor[4]=list[4]
-                print("--Proveedor editado--\n")
