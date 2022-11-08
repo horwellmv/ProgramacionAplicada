@@ -1,11 +1,10 @@
 from Persona import Persona
 
 class Cliente(Persona):
-    def __init__(self, dni, nombre, esSocio=False, descuento=0,telefono="Null",direccion="Null") :
+    def __init__(self, dni, nombre, descuento=0,telefono="Null",direccion="Null") :
         super().__init__(telefono,direccion)
         self._dni=dni
-        self._noombre=nombre
-        self._esSocio=esSocio
+        self._nombre=nombre
         self._descuento=descuento
         self.guardar()
     
@@ -21,9 +20,19 @@ class Cliente(Persona):
         )
     
     def guardar(self):
-        clienteNew=[self.dni,self.nombre,self.esSocio,self.descuento,self.telefono,self.direccion]
-        clienteList.append(clienteNew)
+        clienteList.append(self)
+    
+    def editar(self, descuento=0,telefono="Null",direccion="Null"):
+            self.descuento=descuento
+            self.telefono=telefono
+            self.direccion=direccion
+            print("-- Cliente editado! --\n")
 
+
+    def afiliar(self, NewDescuento):
+        self.descuento=NewDescuento
+        print("-- Afiliacion exitosa! --\n")
+    
 # ---------------------------- Getters and Setters
 
     @property
@@ -32,16 +41,8 @@ class Cliente(Persona):
     
     @property
     def nombre(self):
-        return self._noombre
+        return self._nombre
 
-    @property
-    def esSocio(self):
-        return self._esSocio
-    
-    @esSocio.setter
-    def esSocio(self, estado):
-        self._esSocio=estado
-    
     @property
     def descuento(self):
         return self._descuento
@@ -53,13 +54,3 @@ class Cliente(Persona):
 # ------------------------------------------ Recursos de la clase
 
 clienteList=[]
-
-def editarCliente(dni, nombre, esSocio=False, descuento=0,telefono="Null",direccion="Null"):
-        list=[dni, nombre, esSocio, descuento,telefono,direccion]
-        for cliente in clienteList:
-            if cliente[0]==list[0]:
-                cliente[1]=list[1]
-                cliente[2]=list[2]
-                cliente[3]=list[3]
-                cliente[4]=list[4]
-                print("--cliente editado--\n")

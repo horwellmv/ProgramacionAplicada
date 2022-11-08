@@ -7,14 +7,17 @@ class Persona(ABC):
         self._telefono=telefono
         self._direccion=direccion
     
-
-    # ---------------------------------- Meotodos Abstr
+        # ---------------------------------- Metodos Abstr
 
     @abstractclassmethod
     def guardar():
         pass
 
-    # --------------------------------- Getters & Setters
+    @abstractclassmethod
+    def editar():
+        pass
+
+        # --------------------------------- Getters & Setters
 
     @property
     def telefono(self):
