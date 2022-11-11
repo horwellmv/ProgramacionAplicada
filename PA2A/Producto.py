@@ -1,37 +1,45 @@
 
+
+productosList=[]
+
 class Producto:
-    def __init__(self,codigo,nombre,marca,precio,stock):
-        self._codigo=codigo
-        self._nombre=nombre
-        self._marca=marca
-        self._precio=precio
+    def __init__(self,producto,stock:int,categoria,precio:int):
+        self._producto=producto
         self._stock=stock
-        self.guardar()
+        self._categoria=categoria
+        self._precio=precio
+    
+    def __str__(self) -> str:
+        return "\n- {} - {} - {} - {}".format(
+            self.producto,
+            self.stock,
+            self.categoria,
+            self.precio)
     
         # --------------------------- Getters & Setters
     @property
-    def codigo(self):
-        return self._codigo
+    def producto(self):
+        return self._producto
 
-    @codigo.setter
-    def codigo(self,newCodigo):
-        self._codigo=newCodigo
-
-    @property
-    def nombre(self):
-        return self._nombre
-
-    @nombre.setter
-    def nombre(self,newNombre):
-        self._nombre=newNombre
+    @producto.setter
+    def producto(self,newproducto):
+        self._producto=newproducto
 
     @property
-    def marca(self):
-        return self._marca
+    def stock(self):
+        return self._stock
+
+    @stock.setter
+    def stock(self,newstock):
+        self._stock=newstock
+
+    @property
+    def categoria(self):
+        return self._categoria
     
-    @marca.setter
-    def marca(self,newMarca):
-        self._marca=newMarca
+    @categoria.setter
+    def categoria(self,newcategoria):
+        self._categoria=newcategoria
 
     @property
     def precio(self):
@@ -40,38 +48,19 @@ class Producto:
     @precio.setter
     def precio(self,newPrecio):
         self._precio=newPrecio
-    
-    @property
-    def stock(self):
-        return self._stock
-    
-    @stock.setter
-    def stock(self,newStock):
-        self._stock=newStock
 
         # --------------------------- Metodos de clase
 
     def guardar(self):
         productosList.append(self)
 
+    def actualizarStock(self,newStock:int):
+        self.stock=newStock
+        return "\n-- Stock actualizado --\n"
+    
+    def actualizarPrecio(self,newPrecio:int):
+        self.precio=newPrecio
+        return "\n-- Precio Actualizado--\n"
 
-# --------------------- Herramientas globales -----------------------------------
-productosList=[]
-
-def listarProductos():
-    for p in productosList:
-        print("\n** {}  {}  {}  {}  {}  ".format(
-            p.codigo,
-            p.nombre,
-            p.marca,
-            p.precio,
-            p.stock))
 
 # ----------------------------------- test de clase ------------------------------
-
-#Instanciamos:
-pr1=Producto(1,"Arroz","DosHermano",100,10)
-pr2=Producto(2,"Aceite 1lt","Alioli",50,10)
-pr3=Producto(3,"leche","Serenisima",50,10)
-
-listarProductos()
