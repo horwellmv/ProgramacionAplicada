@@ -1,7 +1,12 @@
 from Persona import Persona
 
+# ------------------------------------------ Recursos de la clase
+
+clienteList=[]
+
+# ----------------------------------------------- CLASE CLIENTE
 class Cliente(Persona):
-    def __init__(self, dni, nombre, descuento=0,telefono="Null",direccion="Null") :
+    def __init__(self, dni:int, nombre, descuento:int=0,telefono="Null",direccion="Null") :
         super().__init__(telefono,direccion)
         self._dni=dni
         self._nombre=nombre
@@ -22,14 +27,13 @@ class Cliente(Persona):
     def guardar(self):
         clienteList.append(self)
     
-    def editar(self, descuento=0,telefono="Null",direccion="Null"):
-            self.descuento=descuento
+    def editar(self, telefono="Null",direccion="Null"):
             self.telefono=telefono
             self.direccion=direccion
             print("-- Cliente editado! --\n")
 
 
-    def afiliar(self, NewDescuento):
+    def afiliar(self, NewDescuento=5):
         self.descuento=NewDescuento
         print("-- Afiliacion exitosa! --\n")
     
@@ -51,6 +55,3 @@ class Cliente(Persona):
     def descuento(self, nuevoDescuento):
         self._descuento=nuevoDescuento
 
-# ------------------------------------------ Recursos de la clase
-
-clienteList=[]
