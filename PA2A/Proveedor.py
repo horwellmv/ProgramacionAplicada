@@ -1,4 +1,27 @@
-from Persona import Persona
+from Persona import *
+from ProductoConsumo import *
+from ProductoLimpieza import *
+
+
+# --------------------------------------- LISTAS PARA PERSISTENCIA
+proveedorsList=[]
+
+pConsumo = [
+    ["arroz",10,"PC",450,"Ene/2023"],
+    ["fideos",15,"PC",200,"Marz/2024"],
+    ["azucar",20,"PC",150,"Feb/2023"],
+    ["aceite",10,"PC",350,"Ago/2023"],
+    ["leche",50,"PC",160,"Dic/2022"]
+    ]
+
+pLimpieza = [
+    ["escoba",5,"PL",500,"lote11"],
+    ["secador",5,"PL",300,"lote22"],
+    ["trapo_de_piso",5,"PL",150,"lote33"],
+    ["plumero",5,"PL",700,"lote44"],
+    ["esponja",5,"PL",60,"lote55"]
+    ]
+
 
 class Proveedor(Persona):
     def __init__(self,cuit,razonSocial,categoria,telefono="Null",direccion="Null"):
@@ -21,20 +44,27 @@ class Proveedor(Persona):
     
     def guardar(self):
         proveedorsList.append(self)
-        print("-- Proveedor guardado! --\n")
+        print("-- {} guardado! --\n".format(self.razonSocial))
     
-    def editar(self,categoria,telefono="Null",direccion="Null"):
-        self.categoria=categoria
+    def editar(self,telefono="Null",direccion="Null"):
         self.telefono=telefono
         self.direccion=direccion
-        print("-- Proveedor editado! --\n")
+        print("-- {} editado! --\n".format(self.razonSocial))
     
     def remito(self):
-        if self.categoria=="c":
-            return pConsumo
-        return pLimpieza
+        #["arroz",10,"PC",450,"Ene/2023"]
+        if self.categoria=="PC":
+            for pC in pConsumo:
+                pC[0]=ProductoConsumo(pC[0],pC[1],pC[2],pC[3],pC[4])
+            print("\n-- Remito pConsumo creado exitosamente --\n")
+        
+        if self.categoria=="PL":
+            for pL in pLimpieza:
+                pL[0]=ProductoLimpieza(pL[0],pL[1],pL[2],pL[3],pL[4])
+            print("\n-- Remito pLimpieza creado exitosamente --\n")
+        return productosList
 
-# ----------------------------- Getters & setters
+        # ----------------------------- Getters & setters
 
     @property
     def cuit(self):
@@ -51,11 +81,4 @@ class Proveedor(Persona):
     @categoria.setter
     def categoria(self,nuevaCategoria):
         self._categoria=nuevaCategoria
-
-# ----------------------------------------- Recursos de la clase
-
-pConsumo = [["arroz",10,"PC001",450],["fideos",15,"PC002",200],["azucar",20,"PC3",150],["aceite",10,"PC004",350],["leche",50,"PC005",160]]
-pLimpieza = [["escoba",5,"PL001",500],["secador",5,"PL002",300],["trapo de piso",5,"PL003",150],["plumero",5,"PL004",700],["esponja",5,"PL005",60]]
-
-proveedorsList=[]
 
