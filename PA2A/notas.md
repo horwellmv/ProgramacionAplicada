@@ -1,5 +1,4 @@
 
-
 TP PROGRAMACION APLICADA / GRUPO 8
 
 ENTREGA: 
@@ -30,17 +29,17 @@ MENU SUGERIDO
     pConsumo = [ arroz,fideos,azucar.aceite,leche]
     pLimpieza = [escoba,secador,trapo de piso,plumero, esponja]
 
-    menu opciones:
-    1. Ingresar Productos
-        1.1 producto Consumo
-        1.2 Producto de limpieza
-    2. Registrar Venta
-
-    3. Registrar socio.
+CORRECIONES / ISSUS A REVISAR:
+    Correcciones a realizar:
+    -No toma telefono y direccion el cleinte creado
+    -debe actualizar stock/precio la principal, no añadir a lista la segunda vez
+    -editar cliente
+    -editar proveedor
+    -facturas
 
 ------------------------------------------------
 
-PROGRAA SUGERIDO PARA LA VISTA: Tkinter
+PROGRAMA SUGERIDO PARA LA VISTA: Tkinter
 
 https://docs.python.org/es/3/library/tkinter.html
 ------------------------------------------------
