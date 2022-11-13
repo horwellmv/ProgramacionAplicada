@@ -24,11 +24,12 @@ pLimpieza = [
 
 
 class Proveedor(Persona):
-    def __init__(self,cuit,razonSocial,categoria,telefono="Null",direccion="Null"):
+    def __init__(self,cuit,razonSocial,categoria="PL",telefono="Null",direccion="Null"):
         super().__init__(telefono,direccion)
         self._cuit=cuit
         self._razonSocial=razonSocial
         self._categoria=categoria
+        self._remitos=1
         self.guardar()
 
         # ----------------------------- Metodos de la clase
@@ -55,13 +56,15 @@ class Proveedor(Persona):
         #["arroz",10,"PC",450,"Ene/2023"]
         if self.categoria=="PC":
             for pC in pConsumo:
-                pC[0]=ProductoConsumo(pC[0],pC[1],pC[2],pC[3],pC[4])
-            print("\n-- Remito pConsumo creado exitosamente --\n")
+                pC[0]=ProductoConsumo(pC[0],pC[1],pC[2],pC[3]*self.remitos,pC[4])
+            print("\n-- ClaseProveedor: Remito pConsumo creado exitosamente --\n")
+            self.remitos*=0.5
         
         if self.categoria=="PL":
             for pL in pLimpieza:
-                pL[0]=ProductoLimpieza(pL[0],pL[1],pL[2],pL[3],pL[4])
-            print("\n-- Remito pLimpieza creado exitosamente --\n")
+                pL[0]=ProductoLimpieza(pL[0],pL[1],pL[2],pL[3]*self.remitos,pL[4])
+            print("\n-- ClaseProveedor: Remito pLimpieza creado exitosamente --\n")
+            self.remitos*=0.5
         return productosList
 
         # ----------------------------- Getters & setters
@@ -81,4 +84,13 @@ class Proveedor(Persona):
     @categoria.setter
     def categoria(self,nuevaCategoria):
         self._categoria=nuevaCategoria
+    
+    @property
+    def remitos(self):
+        return self._remitos
+    
+    @remitos.setter
+    def remitos(self,nuevo:int):
+        self._remitos+=nuevo
+    
 
