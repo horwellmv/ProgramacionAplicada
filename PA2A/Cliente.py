@@ -35,7 +35,7 @@ class Cliente(Persona):
 
     def afiliar(self, NewDescuento=5):
         self.descuento=NewDescuento
-        print("-- Afiliacion exitosa! --\n")
+        print("-- ClassCliente: Afiliacion exitosa! --\n")
     
 # ---------------------------- Getters and Setters
 
