@@ -7,8 +7,8 @@ facturaList=[]
 class Factura():
     def __init__(self,ticket,dniCliente=0):
         self._fecha=datetime.now()
-        self._ticket=ticket
         self.detallesFactura=[]
+        self._ticket=ticket
         self._dniCliente=dniCliente
         self._nombreCliente="No socio."
         self._descuento=0
@@ -21,24 +21,23 @@ class Factura():
         self.cargarFactura()
 
     def __str__(self) -> str:
-        return" Cliente: {} -  Subtotal: ${} - Descuentos:-{}%  -  TOTAL: ${} ".format(self.nombreCliente, self.total, self.descuento, self.precioFinal)
+        return"FACTURA N°: {} || CLIENTE: {} -  SUBTOTAL: ${} - DESC:-{}%  -  TOTAL: ${} ".format(self.ticket,self.nombreCliente, self.total, self.descuento, self.precioFinal)
 
-    # Objeto self,ticketDetalle,articulo:Producto,cantidad=1
+    # Objeto self,articulo:Producto,cantidad=1
     def cargarDetalles(self):
         for i in DetalleList:
-            if i.ticketDetalle == self.ticket:
-                self.detallesFactura.append(i) # En lista con formato (- 1 - coca - 1 - 115 - 115)
-                print("FacturaClass: Metodo cargar detalle: detalle facturado")
-            else: print("FacturaClass: No se econtraron detalles a facturar")
+            self.detallesFactura.append(i) # En lista con formato (- coca - 1 - 115 - 115)
+            print("FacturaClass: Metodo cargar detalle: detalle facturado")
+        DetalleList.clear()
+
 
     #dni:int, nombre, descuento:int=0,telefono="Null",direccion="Null"
     def cargarCliente(self):
         for i in clienteList:
-            if i.dni==self.cliente:
+            if i.dni==self.dniCliente:
                 self.descuento=i.descuento
                 self.nombreCliente=i.nombre
-                print("Metodo CargarCliente: Cliente encontrado.")
-            else: print("Metodo CargarCliente: Cliente no encontrado.")
+                print("FacturaClass: Metodo CargarCliente: Cliente encontrado.")
     
     def cargarTotal(self):
         for i in self.detallesFactura:
@@ -56,20 +55,20 @@ class Factura():
         print("FacturaClass: Metodo cargarFactura ejecutado")
 
     # ------------------------- Getters & Setters
-
+    
+    property
+    def fecha(self):
+        return self._fecha
+    
     @property
     def ticket(self):
         return self._ticket
-    
-    @ticket.setter
-    def ticket(self,newTicket):
-        self._ticket=newTicket
-    
+
     @property
-    def cliente(self):
+    def dniCliente(self):
         return self._dniCliente
     
-    @cliente.setter
+    @dniCliente.setter
     def dniCliente(self,newCliente):
         self._dniCliente=newCliente
     
