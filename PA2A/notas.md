@@ -6,11 +6,13 @@ ENTREGA:
 
 INTEGRANTES: 
     FEDERICO A BRITEZ - MURILLO HORWELL
+
 ------------------------------------------------
 
 DIAGRAMA DE CLASES SUGERIDO:
 
 https://lucid.app/lucidchart/5b0938aa-6d37-4103-9d18-162bfae907e4/edit?viewport_loc=-2441%2C-1503%2C3207%2C1386%2C0_0&invitationId=inv_449d7960-d2d3-4527-a475-539baecccecd
+
 ------------------------------------------------
 
 SE PIDE USAR LOS CONCEPTOS DE :
@@ -24,24 +26,34 @@ SE PIDE USAR LOS CONCEPTOS DE :
 
 ------------------------------------------------
 
-MENU SUGERIDO
+PRODUCTOS SUGERIDOS
 
     pConsumo = [ arroz,fideos,azucar.aceite,leche]
     pLimpieza = [escoba,secador,trapo de piso,plumero, esponja]
 
+------------------------------------------------
+
 CORRECIONES / ISSUS A REVISAR:
+
     Correcciones a realizar:
-    -No toma telefono y direccion el cleinte creado
     -debe actualizar stock/precio la principal, no añadir a lista la segunda vez
     -editar cliente
     -editar proveedor
-    -facturas
+
+    #Resolver: Editar proveedor, editar cliente / 
+    # Remito no agrega stock, solo crea mas productos iguales / 
+    # Detalle deberia restar stock al facturar recien / 
+    # falta funcion cancelar venta / 
+    # buscar limpiar los campos al cancelar o facturar
+    # Ordenar por paquetes?
+    # Corregir implementacion de fecha
 
 ------------------------------------------------
 
 PROGRAMA SUGERIDO PARA LA VISTA: Tkinter
 
 https://docs.python.org/es/3/library/tkinter.html
+
 ------------------------------------------------
 
 CONSIGNA:
@@ -64,27 +76,5 @@ CONSIGNA:
     Con cada venta, el sistema debe realizar la actualización del stock correspondiente y generar y
     registrar la factura y/o ticket emitido con los descuentos efectuados (según el cliente sea o no socio)
     y el detalle de productos vendidos.
-------------------------------------------------
-
-.PY DE CLASE FACTURA Y CLASE FACTURADETALLE
-
-    class Factura:
-        def __init__(self,fecha,nrofactura,tipoFactura,detalle):
-            self.fecha = fecha
-            self._nrofactura=nrofactura
-            self.tipoFactura=tipoFactura
-    
-    #Objeto Detalle de Factura
-
-        @property
-        def nrofactura(self, _nrofactura):
-            return self._nrofactura
-
-    class Detalle():
-        def __init__(self,nroitem,producto,cantidad,precioUnitario):
-            self._nroitem=nroitem
-            self._producto=producto
-            self._cantidad=cantidad
-            self._precioUnitario=precioUnitario
 
 ------------------------------------------------
