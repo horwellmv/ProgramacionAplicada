@@ -1,22 +1,20 @@
 from Producto import Producto
-
 from Proveedor import productosList
 
 DetalleList=[]
 
-def newDetalle(nTicket,produc,cant=1):
+def newDetalle(produc,cant=1):
     for i in productosList:
         if i.producto == produc:            
             if i.stock>=cant:
                 i.stock-=cant
                 produc=i
-                Detalle(nTicket,produc,cant)
+                Detalle(produc,cant)
             else: print("Metodo NewDetalle: No hay stock suficiente.") 
 
 
 class Detalle:        
-    def __init__(self,ticketDetalle,articulo:Producto,cantidad=1):
-        self._ticketDetalle=ticketDetalle
+    def __init__(self,articulo:Producto,cantidad=1):
         self._articulo=articulo.producto
         self._cantidad=cantidad
         self._precioU=round(articulo.precio*1.15)  # Agregamos el 15% de valor ganado
@@ -25,8 +23,7 @@ class Detalle:
         self.guardarDetalle()
 
     def __str__(self) -> str:
-        return "- {} - {} - {} - {} - {} ".format(
-            self.ticketDetalle,
+        return "- {} - {} - {} - {} ".format(
             self.articulo,
             self.cantidad,
             self.precioU,
@@ -40,10 +37,6 @@ class Detalle:
     @property
     def articulo(self):
         return self._articulo
-    
-    @property
-    def ticketDetalle(self):
-        return self._ticketDetalle
 
     @property
     def precioU(self):
