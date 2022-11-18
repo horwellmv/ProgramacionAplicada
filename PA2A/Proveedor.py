@@ -52,7 +52,7 @@ class Proveedor(Persona):
         self.direccion=direccion
         print("-- {} editado! --\n".format(self.razonSocial))
     
-    def remito(self):
+    '''def remito(self):
         #["arroz",10,"PC",450,"Ene/2023"]
         if self.categoria=="PC":
 
@@ -64,7 +64,28 @@ class Proveedor(Persona):
             for pL in pLimpieza:
                 pL[0]=ProductoLimpieza(pL[0],pL[1],pL[2],pL[3],pL[4])
             print("\n-- ClaseProveedor: Remito pLimpieza creado exitosamente --\n")
-        return productosList
+        return productosList'''
+    
+    #self, producto, stock: int, categoria, precio: int, vencimiento
+    def remito(self):
+        if self.categoria=="PC":
+            for pObj in productosList:
+                for pList in pConsumo:
+                    if pObj.producto==pList[0]:
+                        pObj.stock+=pList[1]
+                        pObj.precio=pList[3]
+                        pObj.vencimiento=pList[4]
+                        print("Actualizado")
+
+        if self.categoria=="PL":
+            for pObj in productosList:
+                for pList in pLimpieza:
+                    if pObj.producto==pList[0]:
+                        pObj.stock+=pList[1]
+                        pObj.precio=pList[3]
+                        pObj.lote=pList[4]
+                        print("Actualizado")
+
 
         # ----------------------------- Getters & setters
 
