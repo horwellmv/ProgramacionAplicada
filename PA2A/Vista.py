@@ -8,19 +8,35 @@ from DetalleFactura import *
 from Factura import *
 
 
+# Consumo= producto, stock: int, categoria, precio: int, vencimiento
+# Limpieza= producto, stock: int, categoria, precio: int, lote
+
+cli1=Cliente(1,"Horwell",10,"11-5022-0000","Monserrat")
+cli2=Cliente(2,"Gigi",5,"11-0800-3668","Palermo")
+
+arroz=ProductoConsumo("arroz",0,"PC",0,"Vencimiento --")
+fideos=ProductoConsumo("fideos",0,"PC",0,"Vencimiento --")
+azucar=ProductoConsumo("azucar",0,"PC",0,"Vencimiento --")
+aceite=ProductoConsumo("aceite",0,"PC",0,"Vencimiento --")
+leche=ProductoConsumo("leche",0,"PC",0,"Vencimiento --")
+
+escoba=ProductoLimpieza("escoba",0,"PL",0," Lote --")
+secador=ProductoLimpieza("secador",0,"PL",0," Lote --")
+trapo_de_piso=ProductoLimpieza("trapo_de_piso",0,"PL",0," Lote --")
+plumero=ProductoLimpieza("plumero",0,"PL",0," Lote --")
+esponja=ProductoLimpieza("esponja",0,"PL",0," Lote --")
+
+
+# Limpia las tablas al refrescar
 def limpiar(tabla):
     limpiar=tabla.get_children()
     for i in limpiar:
         tabla.delete(i)
-        
 
-# Consumo= producto, stock: int, categoria, precio: int, vencimiento
-# Limpieza= producto, stock: int, categoria, precio: int, lote
-
-#VENTANA PRINCIPAL.
+# --------------------------------------------------V E N T A N A   P R I N C I P A L .
 root = Tk()
 root.title('SUPERMERCADO PA2A')
-root.geometry("870x400")
+root.geometry("900x415")
 
 #INCLUIMOS PANEL PARA LAS PESTAÑAS.
 nb = ttk.Notebook(root)
@@ -35,9 +51,6 @@ p4 = ttk.Frame(nb)
 # ------------------------------------------------------------------------------------------------------ P R I N C I P A L
 # VARIABLES PARA INSTANCIAR PRINCIPAL
 
-# Consumo= producto, stock: int, categoria, precio: int, vencimiento
-# Limpieza= producto, stock: int, categoria, precio: int, lote
-
 def generarRemito():
     prov=NombreProv.get()
     for i in proveedorsList:
@@ -45,7 +58,7 @@ def generarRemito():
             i.remito()
             print("productos fabricados")
     print("Se ejcuto metodo remito")
-
+    NombreProv.set("")
 
 def traerProductos():
     limpiar(treePr)
@@ -55,8 +68,6 @@ def traerProductos():
         if i.categoria=="PL":
             treePr.insert('', 'end', text=i.producto, values=(i.stock,i.categoria,i.precio,i.lote))
 
-
-
 NombreProv = StringVar()
 
 #ELEMENTOS PESTAÑA PRINCIPAL
@@ -65,7 +76,7 @@ cuitE=Entry(p1, textvariable=NombreProv).grid(row=0,column=1)
 
 
 # Botones Principal
-bt1=Button(p1, text='NUEVO REMITO',bg='light blue',command=generarRemito).grid(row=2,column=1)
+bt1=Button(p1, text='NUEVO REMITO',bg='light blue',command=generarRemito).grid(row=2,column=1, pady=15)
 bt2=Button(p1, text='REFRESCAR',bg='light blue',command=traerProductos).grid(row=10,column=1)
 
 
@@ -87,22 +98,14 @@ treePr.grid(row=4,column=7)
 
 # ---------------------------------------------------------------------------------------------------------------- V E N T A S
 
-cli1=Cliente(1,"Horwell",10)
-cli2=Cliente(2,"Gigi",5)
-
-
-pr1=ProductoConsumo("coca",10,"PC",100,"marzo")
-pr2=ProductoConsumo("coco",10,"PC",200,"marzo")
-pr3=ProductoConsumo("cacao",10,"PC",500,"marzo")
-pr4=ProductoLimpieza("trapo",10,"PL",10,"lote1")
-
-
 def detalleVenta():
     for i in productosList:
         if i.producto==articulo.get():
             newDetalle(i.producto,cantidad.get())
             print("TK: Metodo NewDetalle ejecutado")
     traerDetalles()
+    articulo.set("")
+    cantidad.set(1)
 
 def newFactura():
     if len(DetalleList)==0:
@@ -115,6 +118,7 @@ def newFactura():
         newTicket=int(ticket.get())
         newTicket=newTicket+1
         ticket.set(newTicket)
+        dniConsumidor.set(0)
 
 def traerDetalles(): #self.articulo,.cantidad, .precioU,.total
     limpiar(treeV)
@@ -123,12 +127,13 @@ def traerDetalles(): #self.articulo,.cantidad, .precioU,.total
 
 #ELEMENTOS PESTAÑA VENTAS
 ticket =IntVar()
-ticket.set(900000001)
+ticket.set(9001)
 dniConsumidor = IntVar()
 articulo = StringVar()
 cantidad= IntVar()
+cantidad.set(1)
 total= StringVar()
-
+total.set("FACTURA N°: || CLIENTE: No socio. -  SUBTOTAL: $ - DESC:-0%  -  TOTAL: $")
 
 TicketL=Label(p2,text="Ticket N°:").grid(row=0,column=0, pady=15)
 TicketV=Label(p2, textvariable=ticket).grid(row=0,column=1, pady=15)
@@ -142,11 +147,11 @@ ArticuloE=Entry(p2, textvariable=articulo).grid(row=1,column=1)
 descuentoL=Label(p2,text="Cantidad:").grid(row=1,column=5)
 descuentoE=Entry(p2, textvariable=cantidad).grid(row=1,column=6)
 
-TotalL=Label(p2,text="TOTAL: $ ").grid(row=7,column=6)
-TotalL2=Label(p2, textvariable=total).grid(row=7,column=7)
+TotalL=Label(p2,text="TOTAL:").grid(row=7,column=6)
+TotalL2=Label(p2, textvariable=total,font= "Helvetica 9 italic").grid(row=7,column=7)
 
 # BOTONES VENTAS
-bt1=Button(p2, text='AGREGAR',bg='light blue',command=detalleVenta).grid(row=2,column=6)
+bt1=Button(p2, text='AGREGAR',bg='light blue',command=detalleVenta).grid(row=2,column=6, pady=5)
 bt2=Button(p2, text='FACTURAR',bg='light blue',command=newFactura).grid(row=10,column=6)
 
 # TABLA VENTAS
@@ -163,13 +168,18 @@ treeV.heading("precioT",text="$ PRECIO Tot")
 
 treeV.grid(row=4,column=7)
 
-
 # ---------------------------------------------------------------------------------------------------------------- C L I E N T E S
 def newCliente():
     Cliente(dni.get(),nombre.get(),descuento.get(),telefono.get(),direccion.get())
+    dni.set(0)
+    nombre.set("")
+    descuento.set(0)
+    telefono.set("")
+    direccion.set("")
     print("TK: creado Cliente ",nombre.get())
     for i in clienteList:
         print(i)
+    
 
 def traerClientes():
     limpiar(treeC)
@@ -203,7 +213,7 @@ direccionL=Label(p3,text="Direccion:").grid(row=1,column=5)
 direccionE=Entry(p3, textvariable=direccion).grid(row=1,column=6)
 
 # Botones Cliente
-bt1=Button(p3, text='AGREGAR',bg='light blue',command=newCliente).grid(row=2,column=6)
+bt1=Button(p3, text='AGREGAR',bg='light blue',command=newCliente).grid(row=2,column=6, pady=5)
 bt2=Button(p3, text='REFRESCAR',bg='light blue',command=traerClientes).grid(row=10,column=6)
 
 # Tabla clientes
@@ -224,9 +234,13 @@ treeC.grid(row=4,column=7)
 
 # --------------------------------------------------------------------------------------------------------- P R O V E E D O R E S
 
-#cuit,razonSocial,categoria,telefono="Null",direccion="Null"
 def newProveedor():
     p=Proveedor(cuit.get(),rSocial.get(),categoria.get(),telefonoP.get(),direccionP.get())
+    cuit.set(0)
+    rSocial.set("")
+    categoria.set("PC")
+    telefonoP.set("0800 - ")
+    direccionP.set("")
     print("TK: Creado Proveedor ",rSocial.get())
 
 def traerProveedores():
@@ -240,12 +254,12 @@ def traerProveedores():
 cuit = IntVar()
 rSocial = StringVar()
 categoria = StringVar()
+categoria.set("PL")
 telefonoP = StringVar()
+telefonoP.set("0800 - ")
 direccionP = StringVar()
 
 # ELEMENTOS PESTAÑA PROVEEDORES
-#cuit,razonSocial,categoria,telefono="Null",direccion="Null"
-
 
 cuitL=Label(p4,text="Cuit:").grid(row=0,column=0)
 cuitE=Entry(p4, textvariable=cuit).grid(row=0,column=1)
@@ -254,18 +268,17 @@ razSocialL=Label(p4,text="R.Social:").grid(row=1,column=0)
 razSocialE=Entry(p4, textvariable=rSocial).grid(row=1,column=1)
 
 categoriaL=Label(p4,text="Categoria:").grid(row=2,column=0)
-categoriaE=Entry(p4, textvariable=categoria).grid(row=2,column=1)
+categoriaE=Entry(p4 ,textvariable=categoria).grid(row=2,column=1)
 
 telefonoL=Label(p4,text="Telefono:").grid(row=0,column=5)
 telefonoE=Entry(p4, textvariable=telefonoP).grid(row=0,column=6)
 
 direccionL=Label(p4,text="Direccion:").grid(row=1,column=5)
-direccionE=Entry(p4, textvariable=direccionP).grid(row=1,column=6)
+direccionE=Entry(p4,textvariable=direccionP).grid(row=1,column=6)
 
 # Botones Proveedores
-bt1=Button(p4, text='AGREGAR',bg='light blue',command=newProveedor).grid(row=2,column=6)
+bt1=Button(p4, text='AGREGAR',bg='light blue',command=newProveedor).grid(row=2,column=6, pady=5)
 bt2=Button(p4, text='REFRESCAR',bg='light blue',command=traerProveedores).grid(row=10,column=6)
-
 
 # Tabla proveedores
 treeP=ttk.Treeview(p4,columns=("rSocial","categoria","telefono","direccion"))
@@ -282,7 +295,6 @@ treeP.heading("telefono",text="TELEFONO")
 treeP.heading("direccion",text="DIRECCION")
 
 treeP.grid(row=4,column=7)
-
 
 # --------------------------------------------------------------------------------- A G R E G A M O S   P E S T A Ñ A S    C R E A D A S 
 nb.add(p1,text='PRINCIPAL')
